@@ -13,7 +13,12 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'npm test'
+        sh 'npm run test-jenkins'
+      }
+    }
+    stage('Publish') {
+      steps {
+        junit 'test-results.xml'
       }
     }
   }
