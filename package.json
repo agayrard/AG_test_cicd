@@ -1,0 +1,26 @@
+{
+  "name": "agayrard-ag_test_cicd",
+  "version": "1.0.0",
+  "description": "node app",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha --exit",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agayrard/AG_test_cicd.git"
+  },
+  "author": "arthur g",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agayrard/AG_test_cicd/issues"
+  },
+  "homepage": "https://github.com/agayrard/AG_test_cicd#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "express": "^4.17.1",
+    "mocha": "^6.2.0"
+  }
+}
