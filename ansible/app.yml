@@ -1,0 +1,50 @@
+---
+- hosts: node_server
+  sudo: yes
+
+
+  vars:
+    - homeDir: /home/ubuntu
+    - appDir : app
+    - repo: https://github.com/agayrard/AG_test_cicd
+    - account: agayrard
+    - privateKey: ~/.ssh/id_rsa
+
+
+  tasks:
+  - name: Install Packages
+    apt:
+        name: "{{ packages }}"
+    vars:
+        packages:
+        - build-essential
+        - npm
+        - git
+        - curl
+
+  - name: Install pm2
+    npm:
+      name: pm2
+      global: yes
+      production: yes
+      state: present
+
+- name: Create APP Directory
+    file: path={{homeDir}}/{{appDir}} state=directory
+
+  - name: Git Clone Repo
+    git: repo=git@github.com:{{account}}/{{repo}}.git dest={{homeDir}}/{{appDir}} update=yes force=yes accept_hostkey=yes key_file={{homeDir}}/.ssh/id_rsa
+    register: git_finished
+
+  - name: Running NPM install
+    npm: path={{homeDir}}/{{appDir}}
+    register: npm_finished
+    when: git_finished.changed
+
+  - name: Stop APP
+    shell: pm2 stop all --silent
+    ignore_errors: yes
+
+  - name: Start APP
+    shell: pm2 start {{homeDir}}/{{appDir}}/app.js --name app
+    ignore_errors: yes

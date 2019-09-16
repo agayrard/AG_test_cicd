@@ -1,0 +1,2 @@
+[app]
+node_server ansible_host=35.181.139.117
