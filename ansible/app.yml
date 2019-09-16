@@ -29,7 +29,7 @@
       production: yes
       state: present
 
-- name: Create APP Directory
+ - name: Create APP Directory
     file: path={{homeDir}}/{{appDir}} state=directory
 
   - name: Git Clone Repo
