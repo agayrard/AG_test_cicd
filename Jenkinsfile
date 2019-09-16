@@ -21,6 +21,22 @@ pipeline {
         junit 'test-results.xml'
       }
     }
+        stage('Publish') {
+      steps {
+        junit 'test-results.xml'
+      }
+    }
+    stage('Deploy') {
+      steps {
+        build 'AG-deploy-nodeapp'
+      }
+    }
+  }
+  environment {
+    npm_config_cache = 'npm-cache'
+  }
+}
+
   }
   environment {
     npm_config_cache = 'npm-cache'
