@@ -21,11 +21,7 @@ pipeline {
         junit 'test-results.xml'
       }
     }
-        stage('Publish') {
-      steps {
-        junit 'test-results.xml'
-      }
-    }
+
     stage('Deploy') {
       steps {
         build 'AG-deploy-nodeapp'
